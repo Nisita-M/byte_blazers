@@ -7,7 +7,7 @@ if (!isset($_POST['uname']) || !isset($_POST['upass1']) )
     die;
 }
 
-$connection=new mysqli("localhost","root","","trnit_db",3306);
+$connection=new mysqli("localhost","root","","trinit_db",3306);
 
 $status=mysqli_query($connection,"insert into user(username,password) values ('$_POST[uname]', '$_POST[upass1]')");
  
