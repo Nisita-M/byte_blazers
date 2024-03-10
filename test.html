@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Upload Questions</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>View and Upload Questions</h1>
+        <div id="questionList">
+            <!-- Questions will be displayed here -->
+        </div>
+        <h2>Upload a New Question</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <div>
+                <label for="question">Question:</label><br>
+                <textarea id="question" name="question" rows="4" cols="50"></textarea>
+            </div>
+            <div>
+                <label for="image">Image:</label><br>
+                <input type="file" id="image" name="image">
+            </div>
+            <button type="submit">Upload</button>
+        </form>
+        <div id="message"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Function to load questions when the page loads
+        window.onload = function() {
+            fetchQuestions();
+        };
+
+        // Function to fetch questions and display them
+        function fetchQuestions() {
+            fetch('fetch_questions.php')
+            .then(response => response.json())
+            .then(data => {
+                const questionList = document.getElementById('questionList');
+                questionList.innerHTML = ''; // Clear previous content
+                data.forEach(question => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.innerHTML = `
+                        <h3>${question.question}</h3>
+                        <img src="uploads/${question.image}" alt="Question Image" style="max-width: 300px;">
+                    `;
+                    questionList.appendChild(questionDiv);
+                });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="file"] {
+    margin-top: 5px;
+}
+
+#message {
+    margin-top: 10px;
+    color: green;
+}
